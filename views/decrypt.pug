@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  
+  script(type='text/javascript').
+
+    function decode() {
+      image = document.getElementById('image').files[0];
+      if (image) {
+        var reader = new FileReader();
+        reader.onloadend = function() {
+          window.location.assign('/decode/' + encodeURIComponent(reader.result));
+        }
+        reader.readAsDataURL(image);
+      }
+    }
+
+  h2 :: DECRYPT YOUR IMAGE ::
+  input(id='image', type='file')
+  br
+  button(onclick='decode()', class='decrypt') Decode

@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  
+  script(type='text/javascript').
+
+    function encode() {
+      text = document.getElementById('text').value;
+      if (text)
+        window.location.assign('/encode/' + encodeURIComponent(text));
+    }
+
+    function decode() {
+      image = document.getElementById('image').files[0];
+      if (image) {
+        var reader = new FileReader();
+        reader.onloadend = function() {
+          window.location.assign('/decode/' + encodeURIComponent(reader.result));
+        }
+        reader.readAsDataURL(image);
+      }
+    }
+
+  br
+  img.image(id='encrypted-image', src=imageData, width=200, height=200)
+  br
+  a(href=imageData download='image' onclick='this.download=(new Date()).toISOString().replace(/-|T|:/g,"")')
+    button(class='save-buttn') SAVE THIS IMAGE
+  
+  h6 :: PLAIN TEXT STORED IN IMAGE ::
+  p(id='plain-text', style='white-space: pre-wrap') #{decoded}
+
+  h4 :: ENCRYPTION SYSTEM ::
+  a(href='/encrypt', class='encrypt') ENCRYPT YOUR TEXT
+  a(href='/decrypt', class='decrypt') DECRYPT YOUR IMAGE

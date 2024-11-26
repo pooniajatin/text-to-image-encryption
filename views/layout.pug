@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title Bitmap encryption
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/scss.css')
+  body
+    // Add the wrapper as the background
+    .wrapper
+      - var n = 0;
+      - var i = 0;
+      - var value;
+
+      while n <= 80
+        div(class='column col-' + ++n)
+          - i = 0;
+          while i < 50
+            - ++i;
+            //- - value = Math.floor(Math.random() * 431) + 256;
+            - value = Math.floor(Math.random() * 255) + 10240;
+            span &##{value};
+
+    br
+    img.image(id='logo', src='/pics/logo1.png', width=700, onclick='window.location.assign("/")', style='cursor:pointer')
+
+    block content
+
+    br
+    a(href='/about', class='about') !! ABOUT US !!

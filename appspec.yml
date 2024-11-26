@@ -1,0 +1,13 @@
+version: 0.0
+os: linux
+files:
+  - source: /output_image.png  # Include the output image containing the encrypted text
+    destination: /var/www/html/output_image.png  # Deploy to the correct directory
+
+hooks:
+  BeforeInstall:
+    - location: scripts/before_install.sh  # Optional hook to prepare for deployment
+      timeout: 180
+  AfterInstall:
+    - location: scripts/after_install.sh  # Optional hook to perform actions after deployment
+      timeout: 180
